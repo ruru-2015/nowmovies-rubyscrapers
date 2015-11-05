@@ -9,7 +9,7 @@ afisearchpage = "http://www.afi.com/members/catalog/search.aspx?s="
 agent.get(afisearchpage) { |page|
 
   results = page.form_with(:name => 'Search') do |search|
-    search.SearchText = 'amazon' end.submit
+    search.SearchText = 'bacon' end.submit
   results.links_with(:href => /DetailView.aspx\?s=\&Movie=/).each do |link|
     puts link
     current_movie = Movie.new
