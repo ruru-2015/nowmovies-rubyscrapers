@@ -5,10 +5,11 @@ class GoogleMovies
     @base_url = "https://www.google.com/movies?near=wellington,&sort=1"
     @Movies = {}
   end
-
+# "#link_1_theater_8547115232414900036"
   def getStuff
     found_movies = []
-    dates = []
+    showTimes = []
+    list = []
     agent = Mechanize.new { |agent|
       agent.user_agent_alias = 'Windows Chrome'
     }
@@ -18,13 +19,13 @@ class GoogleMovies
         description_page = link.click
         title = description_page.search('h2[itemprop="name"]').text.strip
         @Movies[title] = {}
+        showTimes = description_page.search(".theater div.times").text.strip
+        p showTimes
         description_page.search('.theater .name').each do |cinema|
-          @Movies[title][cinema.text.strip] = []
+          cinemaName = cinema.text.strip
+          @Movies[title][cinemaName] = list
         end
       end
-      # @Movies.each do |movie|
-      #   p movie
-      # end
       p @Movies
     }
   end
