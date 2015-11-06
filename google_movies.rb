@@ -19,7 +19,7 @@ class GoogleMovies
         title = description_page.search('h2[itemprop="name"]').text.strip
         @Movies[title] = {}
         description_page.search('.theater .name').each do |cinema|
-          @Movies[title] = {cinema.text.strip => []}
+          @Movies[title][cinema.text.strip] = []
         end
       end
       # @Movies.each do |movie|
